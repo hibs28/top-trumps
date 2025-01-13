@@ -15,10 +15,10 @@ print(response)
 print("The pokemon's ID is" + pokemon_number)
 
 # Retrieves weight from API GET response and converts it from hectograms to kilograms.
-def convert_to_kg(pokemon):
+def weight_retrieval(pokemon):
     weight = pokemon['weight']
     weight = int(weight) / 10
-    print(str(weight) + "kg")
+    print("Weight: " + str(weight) + "kg")
 
 def name_retrieval(pokemon):
     name = pokemon['name']
