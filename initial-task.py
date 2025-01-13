@@ -28,7 +28,7 @@ def name_retrieval(pokemon):
 def height_retrieval(pokemon):
     height = pokemon['height']
     height = int(height) * 10
-    print("Pokemon Height: " + str(height) + "cm")
+    print("Pokémon Height: " + str(height) + "cm")
 
 # Check if the response is successful
 if response.status_code == 200:
