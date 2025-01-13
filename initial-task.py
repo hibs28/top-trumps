@@ -1,8 +1,5 @@
 import requests
-
 import random
-
-from pprint import pprint
 
 pokemon_number = random.randint(1, 151)
 #generate a random number between 1 and 151
@@ -31,13 +28,20 @@ def height_retrieval(pokemon):
     height = int(height) * 10
     print("Pokémon Height: " + str(height) + "cm")
 
+# Dictionary
+pokemon_dict = {'id':pokemon_number,
+               'name':pokemon['name'],
+               'height':pokemon['height'],
+               'weight':pokemon['weight']
+               }
+
 # Check if the response is successful
 if response.status_code == 200:
     pokemon = response.json()
-    # pprint(pokemon)
     name_retrieval(pokemon)
     height_retrieval(pokemon)
-    weight_retrieval(pokemon)  
+    weight_retrieval(pokemon)
+    print("Dictionary" + str(pokemon_dict))
 
 else:
     print(f"Error: Could not find Pokémon with this ID '{pokemon_number}'. Please check the number.")
