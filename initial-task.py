@@ -24,6 +24,12 @@ def name_retrieval(pokemon):
     name = pokemon['name']
     print("What is the Pokémon's name? " + name)
 
+# Height is in Decimetres
+def height_retrieval(pokemon):
+    height = pokemon['height']
+    height = int(height) 
+    print("Height:" + str(height) + "dm")
+
 # Check if the response is successful
 if response.status_code == 200:
     pokemon = response.json()
