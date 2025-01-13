@@ -12,7 +12,7 @@ response = requests.get(url)
 pokemon = response.json()
 
 print(response)
-print("The pokemon's ID is" + pokemon_number)
+print("The Pokemon's ID is " + str(pokemon_number))
 
 # Retrieves weight from API GET response and converts it from hectograms to kilograms.
 def weight_retrieval(pokemon):
