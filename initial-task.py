@@ -20,6 +20,7 @@ def weight_retrieval(pokemon):
     weight = int(weight) / 10
     print("Pokémon Weight: " + str(weight) + "kg")
 
+# Retrieves name of Pokémon
 def name_retrieval(pokemon):
     name = pokemon['name'].title()
     print("Pokémon Name: " + name)
