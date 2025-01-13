@@ -21,8 +21,8 @@ def weight_retrieval(pokemon):
     print("Weight: " + str(weight) + "kg")
 
 def name_retrieval(pokemon):
-    name = pokemon['name']
-    print("What is the Pokémon's name? " + name)
+    name = pokemon['name'].title()
+    print("The Pokémon's name is " + name)
 
 # Height is in Decimetres
 def height_retrieval(pokemon):
