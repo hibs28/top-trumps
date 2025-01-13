@@ -1,0 +1,19 @@
+# Function to get Pokémon data from the API based on ID
+
+def get_pokemon_by_id(pokemon_id):
+    url = f"https://pokeapi.co/api/v2/pokemon/{pokemon_id}/"
+    response = requests.get(url)
+
+    if response.status_code == 200:
+        data = response.json()
+        # Extracting the required details
+        pokemon_data = {
+            'name': data['name'],
+            'id': data['id'],
+            'height': data['height'],
+            'weight': data['weight']
+        }
+        return pokemon_data
+    else:
+        print(f"Error fetching data for Pokémon ID {pokemon_id}")
+        return None
