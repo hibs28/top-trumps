@@ -12,7 +12,7 @@ response = requests.get(url)
 pokemon = response.json()
 
 print(response)
-print("Pokémon's ID:  " + str(pokemon_number))
+print("Pokémon ID: " + str(pokemon_number))
 
 # Retrieves weight from API GET response and converts it from hectograms to kilograms.
 def weight_retrieval(pokemon):
@@ -22,7 +22,7 @@ def weight_retrieval(pokemon):
 
 def name_retrieval(pokemon):
     name = pokemon['name'].title()
-    print("Pokémon's Name: " + name)
+    print("Pokémon Name: " + name)
 
 # Height is in Centimetres
 def height_retrieval(pokemon):
