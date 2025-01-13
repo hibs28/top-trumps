@@ -17,3 +17,10 @@ print(pokemon_number)
 pokemon = response.json()
 pprint(pokemon)
 
+# Retrieves weight from API GET response and converts it from hectograms to kilograms.
+def convert_to_kg(pokemon):
+    weight = pokemon['weight']
+    weight = int(weight) / 10
+    print(str(weight) + "kg")
+
+convert_to_kg(pokemon)
