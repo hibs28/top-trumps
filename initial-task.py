@@ -28,7 +28,7 @@ def name_retrieval(pokemon):
 def height_retrieval(pokemon):
     height = pokemon['height']
     height = int(height) * 10
-    print("Height: " + str(height) + "cm")
+    print("Pokemon Height: " + str(height) + "cm")
 
 # Check if the response is successful
 if response.status_code == 200:
@@ -36,7 +36,7 @@ if response.status_code == 200:
     # pprint(pokemon)
     name_retrieval(pokemon)
     height_retrieval(pokemon)
-    convert_to_kg(pokemon)  
+    weight_retrieval(pokemon)  
 
 else:
     print(f"Error: Could not find Pokémon with this ID '{pokemon_number}'. Please check the number.")
