@@ -152,8 +152,8 @@ else:
         pokemon_stat = player_dict[stat_choice]
         opponent_stat = opponent_dict[stat_choice]
 
-        print(f"Player's {stat_choice}: {pokemon_stat}")
-        print(f"Opponent's {stat_choice}: {opponent_stat}")
+        print(f"Player One's Pokémon {stat_choice}: {pokemon_stat}")
+        print(f"Opponent's Pokémon {stat_choice}: {opponent_stat}")
 
 
         if pokemon_stat > opponent_stat:
