@@ -16,7 +16,7 @@ def generate_pokemon(role):
         return None
 
 # Generate Pokémon for the player
-player_pokemon = generate_pokemon("Player")
+player_pokemon = generate_pokemon("Player 1")
 
 # Generate Pokémon for the opponent
 opponent_pokemon = generate_pokemon("Opponent")
