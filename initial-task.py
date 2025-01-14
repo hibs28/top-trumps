@@ -35,17 +35,6 @@ pokemon_dict = {'id':pokemon_number,
                'weight':pokemon['weight']
                }
 
-# Check if the response is successful
-if response.status_code == 200:
-    pokemon = response.json()
-    name_retrieval(pokemon)
-    height_retrieval(pokemon)
-    weight_retrieval(pokemon)
-    print("Dictionary" + str(pokemon_dict))
-
-else:
-    print(f"Error: Could not find Pokémon with this ID '{pokemon_number}'. Please check the number.")
-
 # Function to generate and display Pokémon for a given role
 def generate_pokemon(role):
     pokemon_number = random.randint(1, 151)  # Generate a random number between 1 and 151
