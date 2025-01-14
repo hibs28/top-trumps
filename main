@@ -17,6 +17,10 @@ def retrieve_pokemon_data(pokemon_id):
         print(f"Error: Could not find Pokémon with this ID '{pokemon_number}'. Please check the number.")
         return None
 
+#Function to call types for pokemon
+def retrieve_by_type(pokemon_type):
+    pokemon_type_url = 'https://pokeapi.co/api/v2/type/{}'.format(pokemon_type)
+    return requests.get(pokemon_type_url).json()
 
 # Retrieves weight from API GET response and converts it from hectograms to kilograms.
 def weight_retrieval(pokemon):
@@ -34,6 +38,15 @@ def height_retrieval(pokemon):
     height = pokemon['height']
     height = int(height) * 10
     print("Pokémon Height: " + str(height) + "cm")
+
+#Gets a list of pokemon types from API call
+def get_pokemon_type_list():
+    pokemon_response = retrieve_by_type("")
+    pokemon_type_list = []
+    for pokemon_type in pokemon_response['results']:
+        pokemon_type_list.append(pokemon_type['name'])
+    print("\nList of pokemon types: " + str(pokemon_type_list))
+
 
 
 pokemon = retrieve_pokemon_data(pokemon_number)
@@ -80,6 +93,23 @@ if opponent:
     print("Opponent's Pokémon Dictionary:", opponent_dict)
 else:
     print("Error fetching Opponent's Pokémon data.\n")
+
+#Battle mode for type
+def battle_by_type():
+    type_one = get_by_type('electric')
+    type_two = 'fire'
+
+    damage_to_list = []
+    for i in type_one['damage_relations']['double_damage_to']:
+        damage_to_list.append(i['name'])
+
+    for i in type_one['damage_relations']['half_damage_to']:
+        damage_to_list.append(i['name'])
+    print('\n=======================  BATTLE  MODE  =======================')
+    print('\nTypes that damage water type pokemon: ' + str(damage_to_list))
+    if type_two in damage_to_list:
+        print("You have WON!")
+    else: print("Sorry you lost.")
 
 
 # Ask the player to choose a stat
