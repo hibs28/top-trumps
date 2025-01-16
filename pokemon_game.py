@@ -140,10 +140,10 @@ def battle_by_type(player_one_dict, opponent_dict):
 
 # Ask the player to choose a stat
 print('\n=======================  BATTLE  MODE  =======================')
-stat_choice = input("\nChoose a stat to compare (height, weight, type): ").lower()
+stat_choice = input("\nChoose a stat to compare (id, height, weight, type): ").lower()
 
-if stat_choice not in ['height', 'weight', 'type']:
-    print("Invalid choice. Please choose either 'height', 'weight', or 'type'.")
+if stat_choice not in ['id', 'height', 'weight', 'type']:
+    print("Invalid choice. Please choose either 'id', 'height', 'weight', or 'type'.")
 elif stat_choice == "type":
     battle_by_type(player_dict, opponent_dict)
 else:
