@@ -47,5 +47,16 @@ if player_one and opponent:
             print("Error: One or both Pokémon data couldn't be fetched.\n")
 
 
+def winning_player(player_one_wins, opponent_wins):
+    if player_one_wins > opponent_wins:
+        return 'You are the WINNER! ٩>ᴗ<)و'
+
+    elif opponent_wins > player_one_wins:
+        return 'Sorry, you are the loser (ㅠ﹏ㅠ)'
+
+    else:
+        return "It's a draw!"
+
 start_battle(3)
+winning_player(player_one_wins,opponent_wins)
 
