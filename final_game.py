@@ -2,8 +2,8 @@ import random
 import requests
 
 # generate a random number between 1 and 151
-pokemon_number = random.randint(1, 151)
-opponent_number = random.randint(1, 151)
+def generate_random_pokemon():
+    return random.randint(1, 151)
 
 # ASCII for Pokémon logo => the reason we use triple speech marks is for strings that span multiple lines
 my_string = r"""
@@ -24,8 +24,8 @@ _,-'       `.     |    |  /`.   \,-'    |   \  /   |   |    \  |`.
 print(my_string)
 
 
-# function to retrieve Pokémon data for Player 1
-# Does a GET call for the API, and returns the json response if 200 else print error message and return nothing
+# function to retrieve Pokémon data for Players
+# Does a GET call for the API, and returns the JSON response if 200 else print an error message and returns nothing
 # Returns response.json
 def retrieve_pokemon_data(pokemon_id):
     url = f'https://pokeapi.co/api/v2/pokemon/{pokemon_id}/'
@@ -35,12 +35,12 @@ def retrieve_pokemon_data(pokemon_id):
         return response.json()
 
     else:
-        print(f"Error: Could not find Pokémon with this ID '{pokemon_number}'. Please check the number.")
+        print(f"Error: Could not find Pokémon with this ID '{pokemon_id}'. Please check the number.")
         return None
 
 
 # Function to call types for Pokémon
-# Does a GET call to retrieve a list of Pokémon types or if with a path variable gets details of that specific type
+# Does a GET call to retrieve a list of Pokémon types or with a path variable get details of that specific type
 # Returns response.json
 def retrieve_by_type(pokemon_type):
     pokemon_type_url = 'https://pokeapi.co/api/v2/type/{}'.format(pokemon_type)
@@ -55,7 +55,7 @@ def weight_retrieval(pokemon, player):
     return print(player + "'s Pokémon Weight: " + str(weight) + " kg")
 
 
-# Retrieves name of Pokémon from API retrieve_pokemon_data response json and formats it.
+# Retrieves name of Pokémon from API retrieve_pokemon_data response JSON and formats it.
 # Returns Print
 def name_retrieval(pokemon, player):
     name = pokemon['name'].title()
@@ -77,7 +77,7 @@ def type_retrieval(pokemon, player):
     return print(player + "'s Pokémon Type: " + type_pokemon)
 
 
-# Gets a List of Pokémon types from API GET retrieve_by_type with empty path variable
+# Gets a List of Pokémon types from API GET retrieve_by_type with the empty path variable
 # Returns Print
 def get_pokemon_type_list():
     pokemon_response = retrieve_by_type("")
@@ -87,17 +87,12 @@ def get_pokemon_type_list():
     print("\nList of pokemon types: " + str(pokemon_type_list))
 
 
-# Create a variable for the json both player and opponent
-player_one = retrieve_pokemon_data(pokemon_number)
-opponent = retrieve_pokemon_data(opponent_number)
-
-
-# Function to create the dictionaries using the two jsons, Returns two dictionaries
-def define_dict_player_and_opponent(player_one, opponent):
+# Function to create the dictionaries using the two JSONs, Returns two dictionaries
+def define_dict_player_and_opponent(player_one, opponent, pokemon_number, opponent_number):
     player_dict = None  # Initialise player_dict
     opponent_dict = None  # Initialise opponent_dict
 
-    # IF statement to check which json we are using and set it to correct corresponding dictionary ELSE Error message
+    # IF statement to check which JSON we are using and set it to the correct corresponding dictionary ELSE Error message
     # Player 1 Data
     if player_one:
         # Create a dictionary for Player 1's Pokémon
@@ -138,22 +133,22 @@ def battle_by_type(player_one_dict, opponent_dict, player_one_wins, opponent_win
     # Initialise the list
     damage_to_list = []
     # In the response they have multiple enemies, we filter the one the player can damage to
-    # Loops through list and add it in.
+    # Loop through the list and add it in.
     for i in type_one_enemy['damage_relations']['double_damage_to']:
         damage_to_list.append(i['name'])
 
     for i in type_one_enemy['damage_relations']['half_damage_to']:
         damage_to_list.append(i['name'])
-    # Print the list of Pokémon types that damages Player Pokémon type
-    print('Types that damage ' + type_one + ' type pokemon: ' + str(damage_to_list))
+    # Print the list of Pokémon types that damage Player Pokémon type
+    print('Pokémon type ' + type_one.title() + ' can damage these types of pokemon: ' + str(damage_to_list))
 
-    # Prints both player's Pokémon type formating the type.
+    # Prints both player's Pokémon types formating the type.
     print(f"\nPlayer One's Pokémon Type: {type_one.title()}")
     print(f"Opponent's Pokémon Type: {type_two.title()}")
 
-    # Compares opponent's Pokémon type is within the list
-    # IF opponent's type is in list then output win and add 1 to opponent's win
-    # ELSE output loss and add 1 to opponent's win
+    # Compares opponent's Pokémon type within the list
+    # IF the opponent's type is in the list then output win and add 1 to the opponent's win
+    # ELSE output loss and add 1 to the opponent's win
     if type_two in damage_to_list:
         player_one_wins += 1
         return "You have WON! ٩>ᴗ<)و", player_one_wins, opponent_wins
@@ -220,13 +215,13 @@ def start_battle(rounds=3):
     opponent_wins = 0
     for round_num in range(1, rounds + 1):
         # Generates a new Pokémon each round for both players
-        pokemon_number = random.randint(1, 151)
-        opponent_number = random.randint(1, 151)
+        pokemon_number = generate_random_pokemon()
+        opponent_number = generate_random_pokemon()
 
         player_one = retrieve_pokemon_data(pokemon_number)
         opponent = retrieve_pokemon_data(opponent_number)
 
-        player_dict, opponent_dict = define_dict_player_and_opponent(player_one, opponent)
+        player_dict, opponent_dict = define_dict_player_and_opponent(player_one, opponent, pokemon_number, opponent_number)
 
         # Display Pokémon info
         print(f"\n========================   ROUND {round_num}   ========================")
@@ -237,7 +232,7 @@ def start_battle(rounds=3):
         weight_retrieval(player_one, player_name)
         type_retrieval(player_one, player_name)
 
-        # gets stat_choice from user as an input - currently it's not case-sensitive
+        # gets stat_choice from the user as an input - currently it's not case-sensitive
         stat_choice = input("\nChoose a stat to compare (id, height, weight, type): ").lower()
 
         print(f"\nPlayer One's Pokémon: {player_dict['name'].title()}")
@@ -253,12 +248,12 @@ def start_battle(rounds=3):
                                                                   player_one_wins, opponent_wins)
         else:
             print("Invalid choice, please choose 'id', 'height', 'weight', or 'type'.")
-            continue  # If user enters the wrong options it continues with the loop
+            continue  # If the user enters the wrong options it continues with the loop
 
         # prints results
         print("\n" + result)
 
-        # Prints at the end of the round the opponents details
+        # Prints at the end of the round the opponent's details
         print("\nOpponents Stats")
         print("-" * 18)
         print("Opponent Pokémon Id: " + str(opponent_number))
