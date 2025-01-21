@@ -52,14 +52,14 @@ def retrieve_by_type(pokemon_type):
 def weight_retrieval(pokemon, player):
     weight = pokemon['weight']
     weight = int(weight) / 10
-    return print(player + " Pokémon Weight: " + str(weight) + " kg")
+    return print(player + "'s Pokémon Weight: " + str(weight) + " kg")
 
 
 # Retrieves name of Pokémon from API retrieve_pokemon_data response json and formats it.
 # Returns Print
 def name_retrieval(pokemon, player):
     name = pokemon['name'].title()
-    return print(player + " Pokémon Name: " + name)
+    return print(player + "'s Pokémon Name: " + name)
 
 
 # Retrieves height from the API Get retrieve_pokemon_data response converts it from decimeters to centimetres
@@ -67,14 +67,14 @@ def name_retrieval(pokemon, player):
 def height_retrieval(pokemon, player):
     height = pokemon['height']
     height = int(height) * 10
-    return print(player + " Pokémon Height: " + str(height) + " cm")
+    return print(player + "'s Pokémon Height: " + str(height) + " cm")
 
 
 # Retrieves type from API Get retrieve_pokemon_data response
 # Returns Print
 def type_retrieval(pokemon, player):
     type_pokemon = pokemon['types'][0]['type']['name'].title()
-    return print(player + " Pokémon Type: " + type_pokemon)
+    return print(player + "'s Pokémon Type: " + type_pokemon)
 
 
 # Gets a List of Pokémon types from API GET retrieve_by_type with empty path variable
@@ -165,6 +165,9 @@ def battle_by_type(player_one_dict, opponent_dict, player_one_wins, opponent_win
 # Ask the player to choose a stat
 print('\n=======================  BATTLE  MODE  =======================')
 
+# Ask for player_ones games
+player_name = input("What is your name? ").title()
+
 
 # Compare the stats of the Player 1 and Opponent
 # Returns a string
@@ -184,7 +187,7 @@ def compare_stat(player_dict, opponent_dict, stat_choice, player_one_wins, oppon
         player_stat_display = player_stat
         opponent_stat_display = opponent_stat
 
-    print(f"Player One's Pokémon {stat_choice.title()}: {player_stat_display}")
+    print(f"{player_name}'s Pokémon {stat_choice.title()}: {player_stat_display}")
     print(f"Opponent's Pokémon {stat_choice.title()}: {opponent_stat_display}")
 
     # Comparison (same logic for ID, Height and Weight)
@@ -228,11 +231,11 @@ def start_battle(rounds=3):
         # Display Pokémon info
         print(f"\n========================   ROUND {round_num}   ========================")
 
-        print("Player One's Pokémon ID: " + str(pokemon_number))
-        name_retrieval(player_one, "Player One")
-        height_retrieval(player_one, "Player One")
-        weight_retrieval(player_one, "Player One")
-        type_retrieval(player_one, "Player One")
+        print(player_name + "'s Pokémon Id: " + str(pokemon_number))
+        name_retrieval(player_one, player_name)
+        height_retrieval(player_one, player_name)
+        weight_retrieval(player_one, player_name)
+        type_retrieval(player_one, player_name)
 
         # gets stat_choice from user as an input - currently it's not case-sensitive
         stat_choice = input("\nChoose a stat to compare (id, height, weight, type): ").lower()
@@ -255,10 +258,10 @@ def start_battle(rounds=3):
         # prints results
         print("\n" + result)
 
-        # Prints at the end of the round the opponent's details
+        # Prints at the end of the round the opponents details
         print("\nOpponents Stats")
         print("-" * 18)
-        print("Opponent Pokémon ID: " + str(opponent_number))
+        print("Opponent Pokémon Id: " + str(opponent_number))
         name_retrieval(opponent, "Opponent")
         height_retrieval(opponent, "Opponent")
         weight_retrieval(opponent, "Opponent")
